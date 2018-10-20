@@ -10,9 +10,11 @@ namespace TwentyOne
     {
         static void Main(string[] args)
         {
+            //Card card = new Card() { Face = "K", Suit = "Spades" }; - Object initialization
+
             Deck deck = new Deck();
-            deck.Shuffle();
-            
+            deck.Shuffle(3);
+
             foreach (Card card in deck.Cards)
             {
                 Console.WriteLine(card.Face + " of " + card.Suit);
@@ -21,6 +23,6 @@ namespace TwentyOne
             Console.ReadLine();
         }
 
-            
+
     }
 }
