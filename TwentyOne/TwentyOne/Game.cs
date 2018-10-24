@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace TwentyOne
 {
-    public class Game
+    public abstract class Game
     {
-        public List<string> Players { get; set; }
+        public List<Player> Players { get; set; }
         public string Name { get; set; }
         public string Dealer { get; set; }
 
-        public void ListPlayers()
+        public abstract void Play(); //Any class inherited must implement Play
+
+        public virtual void ListPlayers() //virtual means inherited classes can override
         {
-            foreach (string player in Players)
+            foreach (Player player in Players)
             {
-                Console.WriteLine(player);
+                Console.WriteLine(player.Name);
             }
         }
     }
