@@ -21,7 +21,8 @@ namespace TwentyOne
             // Append card to log file
             using (StreamWriter file = new StreamWriter(@"C:\Users\Matt\logs\logs.txt", true))
             {
-                file.WriteLine(card);
+                file.WriteLine(DateTime.Now);
+                file.WriteLine(card);                
             }
             Deck.Cards.RemoveAt(0);
         }
