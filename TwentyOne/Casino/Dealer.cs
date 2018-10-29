@@ -22,7 +22,7 @@ namespace Casino
             using (StreamWriter file = new StreamWriter(@"C:\Users\Matt\logs\logs.txt", true))
             {
                 file.WriteLine(DateTime.Now);
-                file.WriteLine(card);                
+                file.WriteLine(card);            
             }
             Deck.Cards.RemoveAt(0);
         }

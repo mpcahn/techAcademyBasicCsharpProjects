@@ -10,6 +10,7 @@ namespace Casino.TwentyOne
     public class TwentyOneGame : Game, IWalkAway
     {
         public TwentyOneDealer Dealer { get; set; }
+
         public override void Play()
         {
             //Make new hand and deck and ask for bet.
@@ -21,15 +22,26 @@ namespace Casino.TwentyOne
             }
             Dealer.Deck = new Deck();
             Dealer.Deck.Shuffle();
-
-            Console.WriteLine("Place your bet:");
-
+                        
             //Place Bets
             foreach (Player player in Players)
             {
-                int bet = Convert.ToInt32(Console.ReadLine());
-                bool BetSuccess = player.Bet(bet);
+                bool validAnswer = false;
+                int bet = 0;
 
+                while (!validAnswer)
+                {
+                    Console.WriteLine("Place your bet:");
+                    validAnswer = int.TryParse(Console.ReadLine(), out bet);
+                    if (!validAnswer) Console.WriteLine("Please enter an integer");
+                }
+
+                if (bet < 0)
+                {
+                    throw new FraudException();
+                }
+
+                bool BetSuccess = player.Bet(bet);
                 if (!BetSuccess)
                 {
                     return;
@@ -53,7 +65,7 @@ namespace Casino.TwentyOne
                         if (blackJack)
                         {
                             Console.WriteLine("Blackjack! {0} Wins {1}!", player.Name, Bets[player]);
-                            player.Balance += Convert.ToInt32((Bets[player] * 2) + Bets[player]);
+                            player.Balance += Convert.ToInt32((Bets[player] * 2) + Bets[player]);                            
                             return;
                         }
                     }
@@ -173,8 +185,8 @@ namespace Casino.TwentyOne
                 {
                     player.IsPlaying = false;
                     return;
-                }
-            }
+                }                
+            }            
         }
 
         public override void ListPlayers()
